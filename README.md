@@ -19,4 +19,4 @@ This new circuit running off the RV 12VDC battery will add:
   If either (or both) gas sensors reads above a threshold value: a unique LED will light,
     the buzzer will sound, and the ceiling fan will activate.
 
-160809 - Still writing first draft of code, and waiting for a few hardware pieces to arrive in the mail.
+160809 - First draft of code completed.  Next upload will be fritzig diagram of project.

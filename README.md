@@ -1,7 +1,7 @@
 # RV-Upgrade
 Arduino-powered panel in RV that controls gas sensors and ceiling fans
 
-This sketch runs the added electronics for a small RV trailer
+This sketch runs the added electronics for a small RV trailer.
 This new circuit running off the RV 12VDC battery will add:
   -12VDC circular power socket
   -2xUSB power sockets

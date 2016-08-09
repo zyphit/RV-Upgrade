@@ -43,9 +43,9 @@ const int smokeLEDpin = 2;
 const int alarmbuzz = 5;
 const int fanswitch = 6;
 const int fanrelay = 7;
+const int statusLED = 8;
 
-
-
+int lightlevel, high = 0, low = 1023;
 
 
 void setup() {
@@ -58,12 +58,55 @@ void setup() {
   pinMode(alarmbuzz,OUTPUT);
   pinMode(fanswitch,INPUT);
   pinMode(fanrelay,OUTPUT);
+  pinMode(statusLED,OUTPUT);
 
+// Shows user the system is running
+  digitalWrite(statusLED,HIGH);
 }
 
 void loop() {
 
+// CO sensor, if it reads a high value, it lights the CO LED, sounds the buzzer, and turns on the ceiling fan
+if (analogRead(COgaspin) > 400) {
+  digitalWrite(CO_LEDpin,HIGH);
+  digitalWrite(fanrelay,HIGH);
+  tone(alarmbuzz,500,500); // 500 Hz for 500 ms, with 250 ms break
+  delay(250);
+  }
 
+// smoke sensor, if it reads a high value, it lights the smoke LED, sounds the buzzer, and turns on the ceiling fan
+if (analogRead(smokepin) > 400) {
+  digitalWrite(smokeLEDpin,HIGH);
+  digitalWrite(fanrelay,HIGH);
+  tone(alarmbuzz,1000,250); // 1000 Hz for 250ms, with 250 ms break
+  delay(250);
+  }
+
+// manual switch-based fan control
+if (digitalRead(fanswitch) == HIGH) {
+  digitalWrite(fanrelay,HIGH);
+  }
+
+// turns off all LEDs, buzzers, and switches during normal conditions
+if ((digitalRead(fanswitch) == LOW) && (analogRead(smokepin) < 400) && (analogRead(COgaspin) < 400)) {
+  digitalWrite(fanrelay,LOW);
+  digitalWrite(alarmbuzz,LOW);
+  digitalWrite(smokeLEDpin,LOW);
+  digitalWrite(CO_LEDpin,LOW);
+  }
+
+//photoresist nightlight, shines brightest in low-light conditions.
+lightlevel = analogRead(photoresistpin);
+lightlevel = map(lightlevel, 0, 1023, 0, 255);
+lightlevel = constrain(lightlevel, 0, 255);
+analogWrite(nightlightLED,lightlevel);
 
 
 }
+
+
+
+
+
+
+

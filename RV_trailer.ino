@@ -71,7 +71,7 @@ if (analogRead(COgaspin) > 400) {
   digitalWrite(CO_LEDpin,HIGH);
   digitalWrite(fanrelay,HIGH);
   tone(alarmbuzz,500,500); // 500 Hz for 500 ms, with 250 ms break
-  delay(250);
+  tone(alarmbuzz,32,250);
   }
 
 // smoke sensor, if it reads a high value, it lights the smoke LED, sounds the buzzer, and turns on the ceiling fan
@@ -79,18 +79,21 @@ if (analogRead(smokepin) > 400) {
   digitalWrite(smokeLEDpin,HIGH);
   digitalWrite(fanrelay,HIGH);
   tone(alarmbuzz,1000,250); // 1000 Hz for 250ms, with 250 ms break
-  delay(250);
+  tone(alarmbuzz,32,250);
   }
 
 // manual switch-based fan control
 if (digitalRead(fanswitch) == HIGH) {
   digitalWrite(fanrelay,HIGH);
+  else {
+    digitalWrite(fanrealy,LOW);
+    }
   }
 
 // turns off all LEDs, buzzers, and switches during normal conditions
 if ((digitalRead(fanswitch) == LOW) && (analogRead(smokepin) < 400) && (analogRead(COgaspin) < 400)) {
   digitalWrite(fanrelay,LOW);
-  digitalWrite(alarmbuzz,LOW);
+  noTone(alarmbuzz);
   digitalWrite(smokeLEDpin,LOW);
   digitalWrite(CO_LEDpin,LOW);
   }
@@ -104,7 +107,7 @@ analogWrite(nightlightLED,lightlevel);
 
 }
 
-
+//how about an extra set of night lights that turn on with motion sensing + darkness?
 
 
 

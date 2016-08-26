@@ -86,7 +86,7 @@ if (analogRead(smokepin) > 400) {
 if (digitalRead(fanswitch) == HIGH) {
   digitalWrite(fanrelay,HIGH);
   else {
-    digitalWrite(fanrealy,LOW);
+    digitalWrite(fanrelay,LOW);
     }
   }
 

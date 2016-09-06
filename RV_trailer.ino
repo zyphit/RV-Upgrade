@@ -85,9 +85,6 @@ if (analogRead(smokepin) > 400) {
 // manual switch-based fan control
 if (digitalRead(fanswitch) == HIGH) {
   digitalWrite(fanrelay,HIGH);
-  else {
-    digitalWrite(fanrelay,LOW);
-    }
   }
 
 // turns off all LEDs, buzzers, and switches during normal conditions
@@ -103,13 +100,7 @@ lightlevel = analogRead(photoresistpin);
 lightlevel = map(lightlevel, 0, 1023, 0, 255);
 lightlevel = constrain(lightlevel, 0, 255);
 analogWrite(nightlightLED,lightlevel);
-
-
 }
-
-//how about an extra set of night lights that turn on with motion sensing + darkness?
-
-
 
 
 
